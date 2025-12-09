@@ -322,6 +322,14 @@ function App() {
                                         src={thumbnailUrl}
                                         alt="Video thumbnail"
                                         className="w-full h-full object-cover opacity-90 group-hover/player:opacity-100 transition-all duration-700 transform group-hover/player:scale-105"
+                                        onError={(e) => {
+                                          e.target.onerror = null;
+                                          if (e.target.src.includes('hqdefault')) {
+                                            e.target.src = e.target.src.replace('hqdefault', 'mqdefault');
+                                          } else {
+                                            e.target.style.opacity = 0;
+                                          }
+                                        }}
                                       />
                                     ) : (
                                       <div className="w-full h-full flex items-center justify-center text-white text-opacity-50">
