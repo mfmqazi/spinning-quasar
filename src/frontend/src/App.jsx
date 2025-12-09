@@ -133,7 +133,7 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800 pb-32 transition-colors duration-500 relative">
       <div
-        className="fixed inset-0 z-0 opacity-[0.03] pointer-events-none mix-blend-multiply"
+        className="fixed inset-0 z-0 opacity-[0.06] pointer-events-none mix-blend-multiply"
         style={{
           backgroundImage: `url(${bgPattern})`,
           backgroundSize: '300px',

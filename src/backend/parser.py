@@ -152,11 +152,23 @@ class ChatParser:
 
                     else:
                         # Skip system messages
-                        if "joined using this group's invite link" in msg_content:
+                        matches_system = False
+                        system_phrases = [
+                            "joined using this group's invite link",
+                            "joined using a group link",
+                            "security code changed",
+                            "added you",
+                            "left"
+                        ]
+                        for phrase in system_phrases:
+                            if phrase in msg_content:
+                                matches_system = True
+                                break
+                        
+                        if matches_system:
                              continue
+
                         if re.search(r'added \+?\d+', msg_content):
-                             continue
-                        if "security code changed" in msg_content:
                              continue
                              
                         url = self.extract_video_url(msg_content)
