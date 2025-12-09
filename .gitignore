@@ -50,11 +50,9 @@ Thumbs.db
 
 # Project specific
 whatsapp_export/
+!whatsapp_export/extracted/_chat.txt
 selenium_data/
 selenium_data_v2/
 selenium_data_v3/
 *.log
-chat_backup.txt
-extracted_12_points.txt
-clean_12_points.txt
-youtube_transcripts.txt
+

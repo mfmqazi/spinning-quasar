@@ -17,7 +17,7 @@ const resolveAssetUrl = (path) => {
     return `${base}${cleanPath}`;
   }
   // In dev, assuming the backend specific port if not proxied
-  return `http://localhost:8001${path}`;
+  return `http://localhost:8000${path}`;
 };
 
 function App() {
@@ -29,7 +29,12 @@ function App() {
   const [loadingSummary, setLoadingSummary] = useState(false)
   const [expandedTranscripts, setExpandedTranscripts] = useState({})
   const [showSettings, setShowSettings] = useState(false)
-  const [groqKey, setGroqKey] = useState(() => localStorage.getItem('groq_api_key') || '')
+  // Use build-time env var first (from GitHub Secrets), then localStorage as fallback
+  const [groqKey, setGroqKey] = useState(() => {
+    const buildTimeKey = import.meta.env.VITE_GROQ_API_KEY;
+    const localKey = localStorage.getItem('groq_api_key');
+    return buildTimeKey || localKey || '';
+  })
 
   const saveKey = (key) => {
     setGroqKey(key)
@@ -86,7 +91,7 @@ function App() {
       // In prod, use static JSON. in Dev, use API.
       const url = IS_PROD
         ? `${import.meta.env.BASE_URL}timeline.json?v=3`
-        : 'http://localhost:8001/api/timeline';
+        : 'http://localhost:8000/api/timeline';
 
       const res = await axios.get(url)
       setTimeline(res.data)
