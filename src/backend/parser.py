@@ -151,6 +151,14 @@ class ChatParser:
                         msg_content = msg_content.replace(attachment_match.group(0), "").strip()
 
                     else:
+                        # Skip system messages
+                        if "joined using this group's invite link" in msg_content:
+                             continue
+                        if re.search(r'added \+?\d+', msg_content):
+                             continue
+                        if "security code changed" in msg_content:
+                             continue
+                             
                         url = self.extract_video_url(msg_content)
                     
                     message_obj = {
