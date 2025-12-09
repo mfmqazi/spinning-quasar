@@ -238,7 +238,7 @@ function App() {
               <div className="space-y-8">
                 {day.messages.map((msg, msgIndex) => {
                   const isImage = msg.type === 'image'
-                  const isTranscript = msg.type === 'transcript'
+                  const isTranscript = msg.type === 'transcript' || (msg.content && typeof msg.content === 'string' && msg.content.includes("[Video Transcript]"));
                   const uniqueId = `${day.date}-${msgIndex}`
                   const expanded = expandedTranscripts[uniqueId]
                   const showPlayer = Boolean(msg.video_url)
