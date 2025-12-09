@@ -42,38 +42,6 @@
         "is_video": true,
         "video_url": "https://www.youtube.com/watch?v=5B8zyQ0oeGQ",
         "image_url": null
-      },
-      {
-        "type": "text",
-        "time": "6:26:28 PM",
-        "sender": "‪+1 (972) 787‑2652‬",
-        "content": "~ Kalyan Madhavan added ‪+1 (972) 787‑2652‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
-      }
-    ]
-  },
-  {
-    "date": "09/26/2025",
-    "messages": [
-      {
-        "type": "text",
-        "time": "12:10:42 PM",
-        "sender": "Oct’25.LMKHealth",
-        "content": "‪+1 (650) 430‑9651‬ added ~ VARUN BHALLA, ‪+1 (650) 307‑0812‬, and ‪+1 (650) 430‑3302‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
-      },
-      {
-        "type": "text",
-        "time": "5:16:56 PM",
-        "sender": "‪+1 (347) 236‑4163‬",
-        "content": "~ Ramesh Kolachalam added ‪+1 (347) 236‑4163‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
       }
     ]
   },
@@ -147,48 +115,12 @@
         "is_video": true,
         "video_url": "https://www.youtube.com/watch?v=LQVW1MVpd5U",
         "image_url": null
-      },
-      {
-        "type": "text",
-        "time": "6:09:41 PM",
-        "sender": "‪+1 (908) 745‑9196‬",
-        "content": "‪+1 (669) 300‑9673‬ added ‪+1 (908) 745‑9196‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
-      },
-      {
-        "type": "text",
-        "time": "8:07:23 PM",
-        "sender": "‪+1 (408) 794‑5552‬",
-        "content": "‪+1 (408) 499‑8359‬ added ‪+1 (408) 794‑5552‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
-      },
-      {
-        "type": "text",
-        "time": "10:34:59 PM",
-        "sender": "‪+91 90494 03113‬",
-        "content": "~ Santosh Mishra added ‪+91 90494 03113‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
       }
     ]
   },
   {
     "date": "09/30/2025",
     "messages": [
-      {
-        "type": "text",
-        "time": "7:05:25 AM",
-        "sender": "‪+91 80102 04321‬",
-        "content": "‪+91 94681 44359‬ added ‪+91 80102 04321‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
-      },
       {
         "type": "text",
         "time": "9:03:36 PM",
@@ -215,48 +147,12 @@
         "is_video": false,
         "video_url": null,
         "image_url": "/static/00000070-PHOTO-2025-09-30-21-03-39.jpg"
-      },
-      {
-        "type": "text",
-        "time": "9:08:32 PM",
-        "sender": "‪+1 (650) 796‑2375‬",
-        "content": "‪+1 (347) 236‑4163‬ added ‪+1 (650) 796‑2375‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
       }
     ]
   },
   {
     "date": "10/01/2025",
     "messages": [
-      {
-        "type": "text",
-        "time": "12:57:02 AM",
-        "sender": "‪+1 (864) 354‑9205‬",
-        "content": "‪+1 (916) 718‑8250‬ added ‪+1 (864) 354‑9205‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
-      },
-      {
-        "type": "text",
-        "time": "1:44:44 AM",
-        "sender": "‪+1 (561) 414‑1109‬",
-        "content": "~ H added ‪+1 (561) 414‑1109‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
-      },
-      {
-        "type": "text",
-        "time": "12:04:30 PM",
-        "sender": "Oct’25.LMKHealth",
-        "content": "‪+1 (949) 302‑2639‬ added ~ Nikki and ‪+1 (949) 981‑3919‬",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
-      },
       {
         "type": "text",
         "time": "3:12:15 PM",
@@ -271,15 +167,6 @@
   {
     "date": "10/02/2025",
     "messages": [
-      {
-        "type": "text",
-        "time": "7:02:15 AM",
-        "sender": "~ Meenakshi Nigam",
-        "content": "Lalit Kapoor added ~ Meenakshi Nigam",
-        "is_video": false,
-        "video_url": null,
-        "image_url": null
-      },
       {
         "type": "image",
         "time": "7:08:03 AM",
@@ -1356,7 +1243,7 @@
         "type": "text",
         "time": "9:32:45 PM",
         "sender": "~ Sukraj Bhattacharjee",
-        "content": "@⁨~Meenakshi Nigam⁩ I want to start Vegan health campaign in my Locality and i need support, it's a Good news My locality Iskcon members are also involving in the change",
+        "content": "@~Meenakshi Nigam I want to start Vegan health campaign in my Locality and i need support, it's a Good news My locality Iskcon members are also involving in the change",
         "is_video": false,
         "video_url": null,
         "image_url": null
@@ -2364,7 +2251,7 @@
         "type": "text",
         "time": "4:14:03 AM",
         "sender": "~ Vasudeva Tanneeru",
-        "content": "Hi @⁨~Meenakshi Nigam⁩ , can you please let us know which food items you would suggest for someone with thyroid issues and high blood pressure?",
+        "content": "Hi @~Meenakshi Nigam , can you please let us know which food items you would suggest for someone with thyroid issues and high blood pressure?",
         "is_video": false,
         "video_url": null,
         "image_url": null
@@ -3206,7 +3093,7 @@
         "type": "text",
         "time": "9:45:17 PM",
         "sender": "‪+65 8388 0234‬",
-        "content": "‪+65 8388 0234‬ changed their phone number to a new number. Tap to message or add the new number.",
+        "content": "+65 8388 0234 changed their phone number to a new number. Tap to message or add the new number.",
         "is_video": false,
         "video_url": null,
         "image_url": null
