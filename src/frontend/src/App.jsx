@@ -161,14 +161,22 @@ function App() {
 
       <main className="max-w-5xl mx-auto px-4 py-8">
 
+        {/* Month Filter & Batch Navigation */}
+        <div className="flex items-center justify-between mb-6 px-1">
+          <h2 className="text-sm font-bold text-indigo-900/60 uppercase tracking-widest flex items-center gap-2">
+            <Calendar className="w-4 h-4" />
+            October 2025 (Batch 1)
+          </h2>
+        </div>
+
         {/* Date Navigation Bar */}
         <div className="mb-10 overflow-x-auto pb-4 scrollbar-hide">
           <div className="flex gap-3 min-w-max px-1">
             <button
               onClick={() => setSelectedDate(null)}
               className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 shadow-md ${!selectedDate
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-indigo-500/30 scale-105'
-                  : 'bg-white text-slate-600 hover:bg-indigo-50 hover:text-indigo-600'
+                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-indigo-500/30 scale-105'
+                : 'bg-white text-slate-600 hover:bg-indigo-50 hover:text-indigo-600'
                 }`}
             >
               All Dates
@@ -181,8 +189,8 @@ function App() {
                   key={day.date}
                   onClick={() => setSelectedDate(day.date === selectedDate ? null : day.date)}
                   className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 shadow-sm border ${day.date === selectedDate
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-transparent shadow-indigo-500/30 scale-105'
-                      : 'bg-white text-slate-600 border-indigo-100 hover:border-indigo-300 hover:text-indigo-700'
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-transparent shadow-indigo-500/30 scale-105'
+                    : 'bg-white text-slate-600 border-indigo-100 hover:border-indigo-300 hover:text-indigo-700'
                     }`}
                 >
                   {label}
@@ -239,8 +247,8 @@ function App() {
                     <div
                       key={msgIndex}
                       className={`group relative p-6 sm:p-8 rounded-[2rem] transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border ${isTranscript
-                          ? 'bg-gradient-to-br from-amber-50 via-orange-50/30 to-white border-orange-100/60'
-                          : 'bg-white border-indigo-50/60 shadow-xl shadow-indigo-100/10'
+                        ? 'bg-gradient-to-br from-amber-50 via-orange-50/30 to-white border-orange-100/60'
+                        : 'bg-white border-indigo-50/60 shadow-xl shadow-indigo-100/10'
                         }`}
                     >
                       {/* Sender Avatar & Name */}
@@ -359,13 +367,14 @@ function App() {
                             )}
                           </button>
                         )}
-                        {msg.type === 'text' && !isTranscript && (
+                        {/* Show summarize for transcripts OR long text messages (>300 chars) */}
+                        {(isTranscript || (msg.type === 'text' && msg.content.length > 300)) && (
                           <button
                             onClick={() => handleSummarize(msg.content)}
-                            className="text-xs font-medium text-indigo-300 hover:text-indigo-600 transition-colors flex items-center gap-1 p-2 rounded-lg hover:bg-indigo-50"
+                            className="text-xs font-medium text-indigo-400 hover:text-indigo-600 transition-colors flex items-center gap-1.5 p-2 rounded-lg hover:bg-indigo-50"
                             title="Summarize using AI"
                           >
-                            <Sparkles className="w-4 h-4" />
+                            <Sparkles className="w-3.5 h-3.5" />
                             <span className="hidden sm:inline">Summarize</span>
                           </button>
                         )}
