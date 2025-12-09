@@ -112,7 +112,7 @@ function App() {
 
     setLoadingSummary(true)
     setSummary('')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    // removed window.scrollTo to preserve user position
 
     try {
       if (IS_PROD || groqKey) {
@@ -268,16 +268,7 @@ function App() {
             </div>
           </div>
 
-          {summary && (
-            <div className="mb-8 p-6 bg-indigo-50 rounded-3xl border border-indigo-100 shadow-lg animate-fade-in relative">
-              <button onClick={() => setSummary('')} className="absolute top-4 right-4 text-indigo-400 hover:text-indigo-700 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-indigo-100">✕</button>
-              <div className="flex items-center gap-2 mb-3 text-indigo-800 font-bold text-lg">
-                <Sparkles className="w-5 h-5 text-indigo-500" />
-                <h3>AI Summary</h3>
-              </div>
-              <p className="text-indigo-900 leading-relaxed font-medium">{summary}</p>
-            </div>
-          )}
+
 
           {loadingSummary && (
             <div className="fixed inset-0 bg-white/60 backdrop-blur-sm z-50 flex items-center justify-center">
@@ -364,7 +355,7 @@ function App() {
                             {/* Video Player Box */}
                             {showPlayer && (() => {
                               const videoIdMatch = msg.video_url.match(/(?:v=|youtu\.be\/|embed\/)([\w\-]+)/);
-                              const videoId = videoIdMatch ? videoIdMatch[1] : null;
+                              const videoId = videoIdMatch ? videoId[1] : null;
                               const thumbnailUrl = videoId
                                 ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
                                 : null;
@@ -478,6 +469,34 @@ function App() {
           </div>
         </main>
       </div>
+
+      {/* Summary Modal */}
+      {summary && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[70] flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden animate-scale-in max-h-[80vh] flex flex-col">
+            <div className="p-6 border-b border-indigo-100 flex justify-between items-center bg-indigo-50/50">
+              <h3 className="text-xl font-bold text-indigo-800 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-indigo-500" />
+                AI Summary
+              </h3>
+              <button onClick={() => setSummary('')} className="text-gray-400 hover:text-gray-600 transition-colors">
+                ✕
+              </button>
+            </div>
+            <div className="p-6 overflow-y-auto">
+              <p className="text-slate-700 leading-relaxed text-lg whitespace-pre-wrap">{summary}</p>
+            </div>
+            <div className="p-4 bg-indigo-50/30 flex justify-end">
+              <button
+                onClick={() => setSummary('')}
+                className="px-6 py-2.5 rounded-xl font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-500/30 transition-all"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Settings Modal */}
       {showSettings && (

@@ -234,64 +234,78 @@ class ChatParser:
             
             if len(transcript_source) == 0:
                 print(f"Checking for transcript file at: {external_transcript_file}")
-                if os.path.exists(external_transcript_file):
-                    print("Reading external transcripts...")
-                    try:
-                        with open(external_transcript_file, 'r', encoding='utf-8') as tf:
-                            t_content = tf.read()
-                            transcript_source = t_content.split('================================================================')
-                            print(f"Found {len(transcript_source)} blocks in transcript file.")
-                    except Exception as e:
-                        print(f"Error reading transcript file: {e}")
-                else:
-                    print("Transcript file not found!")
-
-            print(f"Video Map size: {len(video_map)}")
-            if len(video_map) > 0:
-                print(f"Sample Video Map Keys: {list(video_map.keys())[:5]}")
-
-            count_external = 0
-            for block in transcript_source:
-                block = block.strip()
-                if not block: continue
-                
-                block_url = self.extract_video_url(block)
-                target_msg_idx = -1
-                
-                if block_url:
-                    vid_match = re.search(r'(?:v=|youtu\.be/|embed/)([\w\-]+)', block_url)
-                    if vid_match:
-                        vid_id = vid_match.group(1).strip()
-                        if vid_id in video_map:
-                            target_msg_idx = video_map[vid_id]
-                        else:
-                             print(f"Missed match for ID: '{vid_id}'. URL: {block_url}")
-                                 
-                if target_msg_idx != -1:
-                    count_external += 1
-                    ref_msg = all_messages[target_msg_idx]
-                    # Clean up block: Remove the [Video Transcript] header part
-                    lines = block.splitlines()
-                    content_start = 0
-                    for i, line in enumerate(lines):
-                        if line.startswith("URL:"):
-                            content_start = i + 1
-                            break
+            if os.path.exists(external_transcript_file):
+                print("Reading external transcripts...")
+                try:
+                    with open(external_transcript_file, 'r', encoding='utf-8') as tf:
+                        t_lines = tf.readlines()
                     
-                    clean_content = "\n".join(lines[content_start:]).strip()
-                    if not clean_content: continue
+                    current_vid_id = None
+                    current_content = []
+                    count_external = 0
+                    
+                    def flush_transcript():
+                        nonlocal count_external
+                        if current_vid_id and current_content:
+                            clean_content = "".join(current_content).strip()
+                            # Check if content is valid
+                            if not clean_content: return
+                            
+                            if current_vid_id in video_map:
+                                target_msg_idx = video_map[current_vid_id]
+                                ref_msg = all_messages[target_msg_idx]
+                                
+                                transcript_msg = {
+                                    "type": "transcript", 
+                                    "time_obj": ref_msg["time_obj"] + timedelta(seconds=1), 
+                                    "time": "Transcript",
+                                    "sender": "Archive Bot",
+                                    "content": clean_content,
+                                    "is_video": False,
+                                    "video_url": f"https://www.youtube.com/watch?v={current_vid_id}",
+                                    "image_url": None
+                                }
+                                # print(f"DEBUG: Injecting transcript for {current_vid_id}")
+                                all_messages.append(transcript_msg)
+                                count_external += 1
+                            else:
+                                pass # print(f"Missed match for ID: {current_vid_id}")
 
-                    transcript_msg = {
-                        "type": "transcript", 
-                        "time_obj": ref_msg["time_obj"] + timedelta(seconds=1), 
-                        "time": "Transcript",
-                        "sender": "Archive Bot",
-                        "content": clean_content,
-                        "is_video": False,
-                        "video_url": None,
-                        "image_url": None
-                    }
-                    all_messages.append(transcript_msg)
+                    for line in t_lines:
+                        # Check for URL line which signals start of new video context
+                        if "URL:" in line:
+                            # Flush previous context
+                            flush_transcript()
+                            
+                            # Start new context
+                            current_content = []
+                            current_vid_id = None
+                            
+                            vid_match = re.search(r'(?:v=|youtu\.be/|embed/)([\w\-]+)', line)
+                            if vid_match:
+                                current_vid_id = vid_match.group(1).strip()
+                        
+                        elif "[Video Transcript]" in line:
+                            # Just a header, usually precedes URL. If singular, flush prev.
+                            pass
+                            
+                        elif "=======" in line:
+                            # Separator, ignore
+                            pass
+                            
+                        else:
+                            # Content line
+                            if current_vid_id:
+                                current_content.append(line)
+                                
+                    # Flush last block
+                    flush_transcript()
+                    
+                except Exception as e:
+                    print(f"Error reading transcript file: {e}")
+            else:
+                print("Transcript file not found!")
+                
             print(f"Injected {count_external} transcripts from external file.")
                 
             # Sort all messages by time
@@ -314,7 +328,9 @@ class ChatParser:
                 # Transcript post-processing check
                 if final_msg["type"] == "text":
                     upper_content = final_msg["content"].upper()
-                    if "END OF POST" in upper_content or "END OF BLOG" in upper_content:
+                    # Stricter check: Must have "END OF POST" usually used in blog reposts
+                    # Explicitly exclude the Welcome message if it accidentally contains this phrase
+                    if ("END OF POST" in upper_content or "END OF BLOG" in upper_content) and "WELCOME ALL TO THIS HEALTH GROUP" not in upper_content:
                         final_msg["type"] = "transcript"
 
                 grouped_data[d_str].append(final_msg)
