@@ -328,13 +328,7 @@ class ChatParser:
                 if final_msg["type"] == "image":
                     final_msg["content"] = final_msg["image_url"]
                 
-                # Transcript post-processing check
-                if final_msg["type"] == "text":
-                    upper_content = final_msg["content"].upper()
-                    # Stricter check: Must have "END OF POST" usually used in blog reposts
-                    # Explicitly exclude the Welcome message if it accidentally contains this phrase
-                    if ("END OF POST" in upper_content or "END OF BLOG" in upper_content) and "WELCOME ALL TO THIS HEALTH GROUP" not in upper_content:
-                        final_msg["type"] = "transcript"
+                # Note: Removed transcript post-processing that was hiding legitimate forwarded messages
 
                 grouped_data[d_str].append(final_msg)
 
