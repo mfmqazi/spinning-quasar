@@ -8,8 +8,9 @@ sys.path.append(os.getcwd())
 from src.backend.parser import ChatParser
 
 BASE_DIR = os.getcwd()
-DEC_CHAT_FILE = os.path.join(BASE_DIR, "Dec 25 Batch", "_chat.txt")
-DEC_IMAGES_DIR = os.path.join(BASE_DIR, "Dec 25 Batch")
+# Updated to use the latest December 2025 export (through Dec 9, 2025)
+DEC_CHAT_FILE = os.path.join(BASE_DIR, "Dec 25 Batch - 12-Dec-25", "_chat.txt")
+DEC_IMAGES_DIR = os.path.join(BASE_DIR, "Dec 25 Batch - 12-Dec-25")
 OUTPUT_FILE = os.path.join(BASE_DIR, "src", "frontend", "public", "timeline_dec2025.json")
 
 print(f"Parsing December 2025 chat from {DEC_CHAT_FILE}...")

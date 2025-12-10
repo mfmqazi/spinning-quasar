@@ -94,7 +94,7 @@ function App() {
 
       // In prod, use static JSON. in Dev, use API.
       const url = IS_PROD
-        ? `${import.meta.env.BASE_URL}${timelineFile}?v=4`
+        ? `${import.meta.env.BASE_URL}${timelineFile}?v=5`
         : `http://localhost:8000/api/timeline${selectedBatch === 'dec2025' ? '_dec2025' : ''}`;
 
       const res = await axios.get(url)
