@@ -308,11 +308,18 @@ function App() {
                       const isCollapsible = isLongText;
 
                       // Find associated transcript for this message if it has a video
+                      // Skip unavailable transcripts and prefer the longest one
                       const associatedTranscript = msg.video_url
-                        ? day.messages.find(m =>
-                          m.type === 'transcript' &&
-                          m.video_url === msg.video_url
-                        )
+                        ? day.messages
+                          .filter(m =>
+                            m.type === 'transcript' &&
+                            m.video_url === msg.video_url &&
+                            m.content &&
+                            !m.content.includes('[Transcript Unavailable]') &&
+                            !m.content.includes('[No transcript available]') &&
+                            m.content.length > 100 // Skip very short transcripts
+                          )
+                          .sort((a, b) => b.content.length - a.content.length)[0] // Get longest transcript
                         : null;
 
                       const uniqueId = `${day.date}-${msgIndex}`
